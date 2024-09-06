@@ -1,5 +1,10 @@
 const express = require("express");
-const port = 5000;
+require("dotenv").config();
+const connectDB = require("./config/db");
+
+connectDB();
+
+const port = process.env.PORT || 5000;
 
 /** Routers */
 const notesRouter = require("./routes/notes");
@@ -9,7 +14,7 @@ const app = express();
 
 /**Body parser middleware */
 app.use(express.json());
-app.use(express.urlencoded({ extended: false}))
+app.use(express.urlencoded({ extended: false }));
 
 /**Main page */
 app.get("/", (req, res) => {
